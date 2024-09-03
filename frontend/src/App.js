@@ -9,7 +9,8 @@ import InventoryLogin from "./Components/Items/Login/Login";
 //User Management
 import AddUser from "./Components/User Managment/AddUser/AddUser";
 import UserDetails from "./Components/User Managment/UserDetails/Useretails";
-import Updateuser from "./Components/User Managment/UpdateUser/UpdateUser";
+import UpdateEmploye from "./Components/User Managment/UpdateUser/UpdateUser";
+import Profile from "./Components/User Managment/Profile/Profile";
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
           {/*User Managemnet System*/}
           <Route path="/user/adduser" element={<AddUser />} />
           <Route path="/user/useredetails" element={<UserDetails />} />
-          <Route path="/user/updateusere/:id" element={<Updateuser />} />
+          <Route path="/user/updateemploye/:id" element={<UpdateEmploye />} />
+          <Route path="/profile/:id" element={<Profile />} />
 
 
         </Routes>

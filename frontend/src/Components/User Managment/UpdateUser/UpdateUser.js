@@ -24,7 +24,8 @@ function UpdateEmploye() {
   const sendRequest = async () => {
     await axios
       .put(`http://localhost:5000/employee/${id}`, {
-        type: String(inputs.name),
+
+        type: String(inputs.type),
         name: String(inputs.name),
         phone: String(inputs.phone),
         address: String(inputs.address),
@@ -57,6 +58,20 @@ function UpdateEmploye() {
         </h1>
         <div className="item_full_box">
           <form className="item_form_admin" onSubmit={handleSubmit}>
+          <label className="form_box_item_lable">Type</label>
+<br />
+<select
+  className="form_box_item_input"
+  value={inputs.type}
+  onChange={handleChange}
+  name="type"
+  required
+>
+<option value="">Select Type</option> {/* Optional placeholder */}
+  <option value="Client">Client</option>
+  <option value="Employee">Employee</option>
+</select>
+<br></br>
             <label className="form_box_item_lable">name</label>
             <br></br>
             <input

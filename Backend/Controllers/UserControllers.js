@@ -18,7 +18,7 @@ const getAllUser = async (req, res, next) => {
 
 // data Insert
 const addUser = async (req, res, next) => {
-  const { type,name, gmail, address, phone } = req.body;
+  const { type, name, gmail, address, phone } = req.body;
 
   let emp;
 
@@ -33,13 +33,15 @@ const addUser = async (req, res, next) => {
     await emp.save();
   } catch (err) {
     console.log(err);
+    return res.status(500).json({ message: "Error creating employee", error: err });
   }
-  // not insert emps
+
   if (!emp) {
-    return res.status(404).json({ message: "unable to add Employee" });
+    return res.status(404).json({ message: "Unable to add Employee" });
   }
   return res.status(200).json({ emp });
 };
+
 
 //Get by Id
 const getById = async (req, res, next) => {

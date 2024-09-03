@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
-
 function AddEmploye() {
-  const navigate = useNavigate(); // Changed variable name to navigate
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
+    type: "",
     name: "",
     gmail: "",
     phone: "",
     address: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs((prevInputs) => ({
@@ -21,13 +22,19 @@ function AddEmploye() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
-    await sendRequest();
-    window.alert("Employee Account Create successfully!");
-    navigate("user/useredetails");
+    try {
+      const response = await sendRequest();
+      console.log(response.data); // Add this line to inspect the response
+      window.alert("Employee Account Created successfully!");
+      navigate(`/profile/${response.data.emp._id}`);
+    } catch (error) {
+      console.error("There was an error creating the employee!", error);
+      window.alert("Failed to create Employee Account.");
+    }
   };
+  
   const sendRequest = async () => {
-    await axios.post("http://localhost:5000/employee", {
+    return await axios.post("http://localhost:5000/employee", {
       type: inputs.type,
       name: inputs.name,
       gmail: inputs.gmail,
@@ -35,27 +42,34 @@ function AddEmploye() {
       address: inputs.address,
     });
   };
+
+
   return (
     <div>
       
       <div className="children_div_admin">
         <h1 className="topic_mash_mart">
           Create Account For
-          <span className="sub_topic_mash_mart"> Employee</span>{" "}
+          <span className="sub_topic_mash_mart"> Employee/Client</span>{" "}
         </h1>
         <div className="item_full_box">
           <form className="item_form_admin" onSubmit={handleSubmit}>
           <label className="form_box_item_lable">Type</label>
-            <br></br>
-            <input
-              className="form_box_item_input"
-              type="text"
-              required
-              value={inputs.type}
-              onChange={handleChange}
-              name="type"
-            />
-            <br></br>
+<br></br>
+<select
+  className="form_box_item_input"
+  required
+  value={inputs.type}
+  onChange={handleChange}
+  name="type"
+>
+  <option value="">Select Type</option> {/* Optional placeholder */}
+  <option value="Client">Client</option>
+  <option value="Employee">Employee</option>
+</select>
+
+
+  <br></br>
             <label className="form_box_item_lable">name</label>
             <br></br>
             <input
