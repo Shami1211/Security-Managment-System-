@@ -36,7 +36,7 @@ function AddRate() {
     }
 
     try {
-      await axios.post("http://localhost:8080/items", inputs);
+      await axios.post("http://localhost:5000/items", inputs);
       showAlert("Item added successfully!");
       navigate("/admin/itemdash");
     } catch (error) {

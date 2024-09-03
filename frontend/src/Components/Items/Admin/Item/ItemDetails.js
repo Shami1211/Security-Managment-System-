@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
 import "../../Item.css";
-const URL = "http://localhost:8080/items";
+const URL = "http://localhost:5000/items";
 
 const ItemDetails = () => {
   const [items, setItems] = useState([]);
