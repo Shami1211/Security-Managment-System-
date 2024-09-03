@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import "../../Item.css";
 function AddRate() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -38,7 +37,7 @@ function AddRate() {
     try {
       await axios.post("http://localhost:5000/items", inputs);
       showAlert("Item added successfully!");
-      navigate("/admin/itemdash");
+      navigate("/inventory/itemdash");
     } catch (error) {
       console.error("Error adding item:", error);
       showAlert("Error adding item. Please try again.");
@@ -70,13 +69,13 @@ function AddRate() {
               className="catinpt"
               required
             >
-              <option value="">Select Category</option>
-              <option value="ball">Ball</option>
-              <option value="bat">Bat</option>
-              <option value="gloves">Gloves</option>
-              <option value="helmets">Helmets</option>
-              <option value="pads">Pads</option>
-              <option value="shoes">Shoes</option>
+             
+  <option value="guns">Guns</option>
+  <option value="uniform">Uniform</option>
+  <option value="batons">Batons</option>
+  <option value="radios">Radios</option>
+  <option value="handcuffs">Handcuffs</option>
+  <option value="vests">Vests</option>
             </select>
             <br />
             <label className="item-full-box-label">Name</label>

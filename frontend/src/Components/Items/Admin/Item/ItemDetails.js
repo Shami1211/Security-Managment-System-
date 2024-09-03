@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
-import "../../Item.css";
 const URL = "http://localhost:5000/items";
 
 const ItemDetails = () => {
@@ -108,7 +107,7 @@ const ItemDetails = () => {
           <button
             type="submit"
             className="item-add-btn-admin"
-            onClick={() => (window.location.href = "/admin/additem")}
+            onClick={() => (window.location.href = "/inventory/additem")}
           >
             Add Item
           </button>

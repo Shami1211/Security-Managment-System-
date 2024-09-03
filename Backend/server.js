@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const ItemRoute = require("./Routes/ItemRoute.js")
-const GetItemRoute = require("./Routes/GetItemRoute.js")
+const ItemRoute = require("./Routes/InventoryRoute.js")
 const connectDB = require("./Config/db.js")
 const dotenv = require("dotenv")
 const cors = require("cors");
@@ -22,7 +21,7 @@ app.use(express.json());
 
 //Routes
 app.use('/items',ItemRoute);
-app.use('/getitems',GetItemRoute);
+
 
 const PORT = process.env.PORT || 8080;
 
