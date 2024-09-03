@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ItemRoute = require("./Routes/InventoryRoute.js")
+const employeeRoutes = require('./Routes/InventoryRoute.js');
 const connectDB = require("./Config/db.js")
 const dotenv = require("dotenv")
 const cors = require("cors");
@@ -21,6 +22,7 @@ app.use(express.json());
 
 //Routes
 app.use('/items',ItemRoute);
+app.use('/employee', employeeRoutes);
 
 
 const PORT = process.env.PORT || 8080;
