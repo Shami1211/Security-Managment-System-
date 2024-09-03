@@ -10,8 +10,8 @@ function App() {
     <div>
       <React.Fragment>
         <Routes>
+          
           {/*Inventory Managemnet System*/}
-         
           <Route path="/inventory/login" element={<InventoryLogin />} />
           <Route path="/inventory/additem" element={<AddItem />} />
           <Route path="/inventory/itemdash" element={<ItemDetails />} />

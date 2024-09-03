@@ -96,7 +96,29 @@ const ItemDetails = () => {
     onAfterPrint: () => alert("Successfully Downloaded!"),
     onClose: () => alert("Print canceled")
   });
-  
+
+  // Function to group items by category
+  const groupItemsByCategory = () => {
+    const categories = {
+      guns: [],
+      uniform: [],
+      batons: [],
+      radios: [],
+      handcuffs: [],
+      vests: [],
+    };
+
+    items.forEach((item) => {
+      if (categories[item.category]) {
+        categories[item.category].push(item);
+      }
+    });
+
+    return categories;
+  };
+
+  const categorizedItems = groupItemsByCategory();
+
   return (
     <div className="itmdetails">
       <div className="admin_topic_item">
@@ -136,119 +158,124 @@ const ItemDetails = () => {
             Product<span className="admin_sub_topic_item"> Details</span>
           </div>
           <br></br>
-          <div className="card_set_item">
-            {noResults ? (
-              <h1 className="item-topic">
-                No results <span className="item-us">found</span>
-              </h1>
-            ) : (
-              items.map((item) => (
-                <div>
-                  <div className="">
-                    <div key={item._id} className="card_item ">
-                      {item.imageUrl && (
-                        <img
-                          src={item.imageUrl}
-                          alt="Item_Image"
-                          className="itm_img"
-                        />
-                      )}
-                      <p className="itmname">{item.name}</p>
-                      <div className="details_card_itm">
-                        <p className="card_details">
-                          <b>Quantity:</b> {item.quantity}
-                        </p>
-                        <p className="card_details">
-                          <b>Size:</b> {item.size}
-                        </p>
-                        <p className="card_details">
-                          <b>Company:</b> {item.company}
-                        </p>
-                      </div>
-                      
-                      <div className="btn_box">
-                        <button
-                          className="update_btn"
-                          onClick={() => handleUpdate(item._id)}
-                        >
-                          Update
-                        </button>
-                        <button
-                          className="dlt_btn"
-                          onClick={() => handleDelete(item._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                      {updateData.id === item._id && (
-                        <form className="update_form" onSubmit={handleSubmit}>
-                          <hr></hr>
-                          <br></br>
-                          <label className="item-full-box-label">Name</label>
-                          <br></br>
-                          <input
-                            className="item-full-box-input_update"
-                            type="text"
-                            name="name"
-                            value={updateData.name}
-                            onChange={(e) =>
-                              handleChange(e.target.value, "name")
-                            }
-                            required
+
+          {noResults ? (
+            <h1 className="item-topic">
+              No results <span className="item-us">found</span>
+            </h1>
+          ) : (
+            Object.entries(categorizedItems).map(([category, categoryItems]) => (
+              <div key={category}>
+                <h2 className="category-title">{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+                <div className="card_set_item">
+                  {categoryItems.length > 0 ? (
+                    categoryItems.map((item) => (
+                      <div key={item._id} className="card_item ">
+                        {item.imageUrl && (
+                          <img
+                            src={item.imageUrl}
+                            alt="Item_Image"
+                            className="itm_img"
                           />
-                          <br></br>
-                          <label className="item-full-box-label">
-                            Quantity
-                          </label>
-                          <br></br>
-                          <input
-                            className="item-full-box-input_update"
-                            type="number"
-                            name="quantity"
-                            value={updateData.quantity}
-                            onChange={(e) =>
-                              handleChange(e.target.value, "quantity")
-                            }
-                            required
-                          />
-                          <br></br>
-                          <label className="item-full-box-label">Size</label>
-                          <br></br>
-                          <input
-                            className="item-full-box-input_update"
-                            type="text"
-                            name="size"
-                            value={updateData.size}
-                            onChange={(e) =>
-                              handleChange(e.target.value, "size")
-                            }
-                            required
-                          />
-                          <br></br>
-                          <label className="item-full-box-label">Company</label>
-                          <br></br>
-                          <input
-                            className="item-full-box-input_update"
-                            type="text"
-                            name="company"
-                            value={updateData.company}
-                            onChange={(e) =>
-                              handleChange(e.target.value, "company")
-                            }
-                            required
-                          />
-                          <br></br>
-                          <button type="submit" className="item-add-btn">
-                            Save
+                        )}
+                        <p className="itmname">{item.name}</p>
+                        <div className="details_card_itm">
+                          <p className="card_details">
+                            <b>Quantity:</b> {item.quantity}
+                          </p>
+                          <p className="card_details">
+                            <b>Size:</b> {item.size}
+                          </p>
+                          <p className="card_details">
+                            <b>Company:</b> {item.company}
+                          </p>
+                        </div>
+                        <div className="btn_box">
+                          <button
+                            className="update_btn"
+                            onClick={() => handleUpdate(item._id)}
+                          >
+                            Update
                           </button>
-                        </form>
-                      )}
-                    </div>
-                  </div>
+                          <button
+                            className="dlt_btn"
+                            onClick={() => handleDelete(item._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                        {updateData.id === item._id && (
+                          <form className="update_form" onSubmit={handleSubmit}>
+                            <hr></hr>
+                            <br></br>
+                            <label className="item-full-box-label">Name</label>
+                            <br></br>
+                            <input
+                              className="item-full-box-input_update"
+                              type="text"
+                              name="name"
+                              value={updateData.name}
+                              onChange={(e) =>
+                                handleChange(e.target.value, "name")
+                              }
+                              required
+                            />
+                            <br></br>
+                            <label className="item-full-box-label">
+                              Quantity
+                            </label>
+                            <br></br>
+                            <input
+                              className="item-full-box-input_update"
+                              type="number"
+                              name="quantity"
+                              value={updateData.quantity}
+                              onChange={(e) =>
+                                handleChange(e.target.value, "quantity")
+                              }
+                              required
+                            />
+                            <br></br>
+                            <label className="item-full-box-label">Size</label>
+                            <br></br>
+                            <input
+                              className="item-full-box-input_update"
+                              type="text"
+                              name="size"
+                              value={updateData.size}
+                              onChange={(e) =>
+                                handleChange(e.target.value, "size")
+                              }
+                              required
+                            />
+                            <br></br>
+                            <label className="item-full-box-label">Company</label>
+                            <br></br>
+                            <input
+                              className="item-full-box-input_update"
+                              type="text"
+                              name="company"
+                              value={updateData.company}
+                              onChange={(e) =>
+                                handleChange(e.target.value, "company")
+                              }
+                              required
+                            />
+                            <br></br>
+                            <button type="submit" className="item-add-btn">
+                              Save
+                            </button>
+                          </form>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p>No items in this category</p>
+                  )}
                 </div>
-              ))
-            )}
-          </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
