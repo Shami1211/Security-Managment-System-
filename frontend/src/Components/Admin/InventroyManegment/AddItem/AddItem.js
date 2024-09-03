@@ -27,7 +27,7 @@ function AddItem() {
     navigate("/inventoryitemdetails");
   };
   const sendRequest = async () => {
-    await axios.post("http://localhost:8080/inventory", {
+    await axios.post("http://localhost:3000/inventory", {
       itemname: inputs.itemname,
       quantity: inputs.quantity,
       price: inputs.price,
