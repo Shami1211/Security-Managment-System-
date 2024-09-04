@@ -20,6 +20,10 @@ import UserLogin from "./Components/User Managment/UserLogin/UserLogin";
 import EmployeeDashboard from "./Components/User Managment/DashBoards/Employee/EmployeeDashboard";
 import ClientDashboard from "./Components/User Managment/DashBoards/Client/ClientDashBoard";
 
+//Training Management
+import AddCourse from "./Components/Training Management/AddCourse/AddCourse";
+import AllCourses from "./Components/Training Management/Course/CourseDetails";
+import TraineeLogin from "./Components/Training Management/Login/Login";
 
 
 function App() {
@@ -46,6 +50,11 @@ function App() {
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/employeedash" element={<EmployeeDashboard />} />
           <Route path="/cleientdash" element={<ClientDashboard />} />
+
+          {/*Training Managemnet System*/}
+          <Route path="/addcourse" element={<AddCourse />} />
+          <Route path="/coursedash" element={<AllCourses />} />
+          <Route path="/trainng/login" element={<TraineeLogin />} />
 
 
 

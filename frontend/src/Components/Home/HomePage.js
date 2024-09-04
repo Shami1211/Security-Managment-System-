@@ -24,7 +24,7 @@ function HomePage() {
         <div className="card" onClick={() => handleNavigation('/user/login')}>
           <h3>User Management</h3>
         </div>
-        <div className="card" onClick={() => handleNavigation('/training-management')}>
+        <div className="card" onClick={() => handleNavigation('/trainng/login')}>
           <h3>Training Management</h3>
         </div>
         <div className="card" onClick={() => handleNavigation('/client-management')}>
