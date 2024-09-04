@@ -24,6 +24,7 @@ import ClientDashboard from "./Components/User Managment/DashBoards/Client/Clien
 import AddCourse from "./Components/Training Management/AddCourse/AddCourse";
 import AllCourses from "./Components/Training Management/Course/CourseDetails";
 import TraineeLogin from "./Components/Training Management/Login/Login";
+import EmpAllCourses from "./Components/Training Management/AllCourses/AllCourseDetails";
 
 
 function App() {
@@ -55,8 +56,9 @@ function App() {
           <Route path="/addcourse" element={<AddCourse />} />
           <Route path="/coursedash" element={<AllCourses />} />
           <Route path="/trainng/login" element={<TraineeLogin />} />
+          <Route path="/empallcourses" element={<EmpAllCourses />} />
 
-
+          
 
 
         </Routes>

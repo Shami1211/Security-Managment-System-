@@ -16,7 +16,7 @@ function EmployeeDashboard() {
       <nav>
         <ul>
           <li>
-            <button onClick={() => navigate('/profile')}>View Profile</button>
+            <button onClick={() => navigate('/empallcourses')}>View All Courses</button>
           </li>
           <li>
             <button onClick={() => navigate('/settings')}>Settings</button>
