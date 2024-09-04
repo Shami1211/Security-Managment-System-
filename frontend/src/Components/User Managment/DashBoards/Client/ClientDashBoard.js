@@ -16,10 +16,10 @@ function ClientDashboard() {
       <nav>
         <ul>
           <li>
-            <button onClick={() => navigate('/profile')}>View Profile</button>
+            <button onClick={() => navigate('/addinquiry')}>Add Inquiry</button>
           </li>
           <li>
-            <button onClick={() => navigate('/bookings')}>Manage Bookings</button>
+            <button onClick={() => navigate('/inquiresdash')}>View Inquiries</button>
           </li>
           <li>
             <button onClick={() => navigate('/settings')}>Settings</button>

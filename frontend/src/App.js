@@ -26,6 +26,10 @@ import AllCourses from "./Components/Training Management/Course/CourseDetails";
 import TraineeLogin from "./Components/Training Management/Login/Login";
 import EmpAllCourses from "./Components/Training Management/AllCourses/AllCourseDetails";
 
+//Client Management
+import AddInquiry from "./Components/Client Management/AddInquiry/AddInquery";
+import AllInquires from "./Components/Client Management/AllInquires/AllInquires";
+import ClientLogin from "./Components/Client Management/Login/Login";
 
 function App() {
   return (
@@ -57,6 +61,11 @@ function App() {
           <Route path="/coursedash" element={<AllCourses />} />
           <Route path="/trainng/login" element={<TraineeLogin />} />
           <Route path="/empallcourses" element={<EmpAllCourses />} />
+
+          {/*Training Managemnet System*/}
+          <Route path="/addinquiry" element={<AddInquiry />} />
+          <Route path="/inquiresdash" element={<AllInquires />} />
+          <Route path="/clientlogin" element={<ClientLogin />} />
 
           
 
