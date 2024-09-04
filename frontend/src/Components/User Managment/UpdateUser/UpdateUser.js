@@ -45,7 +45,7 @@ function UpdateEmploye() {
 
     sendRequest().then(() => {
       window.alert("Account Update successfully!");
-      history("/user/useredetails");
+      history("/useredetails");
     });
   };
   return (

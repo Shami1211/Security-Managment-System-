@@ -43,6 +43,9 @@ function AddEmploye() {
     });
   };
 
+  const handleLoginNavigate = () => {
+    navigate("/userlogin");
+  };
 
   return (
     <div>
@@ -119,6 +122,12 @@ function AddEmploye() {
               Submit
             </button>
           </form>
+          <br></br>
+          <p>Already have an account?</p>
+            <button onClick={handleLoginNavigate} className="login_navigate_btn">
+              Login
+            </button>
+
         </div>
       </div>
     </div>
