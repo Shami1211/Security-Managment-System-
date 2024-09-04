@@ -19,7 +19,7 @@ function ClientDashboard() {
             <button onClick={() => navigate('/addinquiry')}>Add Inquiry</button>
           </li>
           <li>
-            <button onClick={() => navigate('/inquiresdash')}>View Inquiries</button>
+            <button onClick={() => navigate('/validteInquiries')}>View Inquiries</button>
           </li>
           <li>
             <button onClick={() => navigate('/settings')}>Settings</button>

@@ -30,6 +30,7 @@ import EmpAllCourses from "./Components/Training Management/AllCourses/AllCourse
 import AddInquiry from "./Components/Client Management/AddInquiry/AddInquery";
 import AllInquires from "./Components/Client Management/AllInquires/AllInquires";
 import ClientLogin from "./Components/Client Management/Login/Login";
+import ValidateInquiry from "./Components/Client Management/ClientInquiry/Validate";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
           <Route path="/addinquiry" element={<AddInquiry />} />
           <Route path="/inquiresdash" element={<AllInquires />} />
           <Route path="/clientlogin" element={<ClientLogin />} />
+          <Route path="/validteInquiries" element={<ValidateInquiry />} />
 
           
 

@@ -7,5 +7,6 @@ client_router.get("/", ClientController.getAllInquiries);
 client_router.get("/:id", ClientController.getInquiryById);
 client_router.put("/:id", ClientController.updateInquiry);
 client_router.delete("/:id", ClientController.deleteInquiry);
+client_router.post("/validate", ClientController.validateInquiry);
 
 module.exports = client_router;

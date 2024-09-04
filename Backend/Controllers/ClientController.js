@@ -1,5 +1,24 @@
 const Client = require("../Model/Client");
 
+const validateInquiry = async (req, res, next) => {
+  try {
+    // Check if both email and name already exist
+    const existingClient = await Client.findOne({ email: req.body.email, name: req.body.name });
+    if (existingClient) {
+      return res.status(200).json({ 
+        message: "Client with the same name and email found", 
+        existingClient 
+      });
+    } else {
+      return res.status(404).json({ message: "No matching client found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 const addInquiry = async (req, res, next) => {
   try {
     // Check if email already exists
@@ -74,4 +93,5 @@ module.exports = {
   getInquiryById,
   updateInquiry,
   deleteInquiry,
+  validateInquiry,
 };
