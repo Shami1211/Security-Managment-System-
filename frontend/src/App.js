@@ -29,8 +29,15 @@ import EmpAllCourses from "./Components/Training Management/AllCourses/AllCourse
 //Client Management
 import AddInquiry from "./Components/Client Management/AddInquiry/AddInquery";
 import AllInquires from "./Components/Client Management/AllInquires/AllInquires";
-import ClientLogin from "./Components/Client Management/Login/Login";
+import ClientManagerLogin from "./Components/Client Management/Login/Login";
 import ValidateInquiry from "./Components/Client Management/ClientInquiry/Validate";
+
+//Booking Management
+import AddBooking from "./Components/Booking Management/AddBooking/AddBooking";
+import AllBookings from "./Components/Booking Management/AllBookings/AllBookings";
+import BookingManagerLogin from "./Components/Booking Management/Login/Login";
+import ValidateBookings from "./Components/Booking Management/ClientBooking/ValidateBookings";
+
 
 function App() {
   return (
@@ -63,13 +70,17 @@ function App() {
           <Route path="/trainng/login" element={<TraineeLogin />} />
           <Route path="/empallcourses" element={<EmpAllCourses />} />
 
-          {/*Training Managemnet System*/}
+          {/*Client Managemnet System*/}
           <Route path="/addinquiry" element={<AddInquiry />} />
           <Route path="/inquiresdash" element={<AllInquires />} />
-          <Route path="/clientlogin" element={<ClientLogin />} />
+          <Route path="/clientlogin" element={<ClientManagerLogin />} />
           <Route path="/validteInquiries" element={<ValidateInquiry />} />
 
-          
+           {/*Booking Managemnet System*/}
+           <Route path="/addbooking" element={<AddBooking />} />
+          <Route path="/bookingdash" element={<AllBookings />} />
+          <Route path="/bookingmanagerlogin" element={<BookingManagerLogin />} />
+          <Route path="/validteBookings" element={<ValidateBookings />} />
 
 
         </Routes>

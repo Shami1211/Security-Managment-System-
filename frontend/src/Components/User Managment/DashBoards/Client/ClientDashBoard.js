@@ -22,7 +22,10 @@ function ClientDashboard() {
             <button onClick={() => navigate('/validteInquiries')}>View Inquiries</button>
           </li>
           <li>
-            <button onClick={() => navigate('/settings')}>Settings</button>
+            <button onClick={() => navigate('/addbooking')}>Add Bookings</button>
+          </li>
+          <li>
+            <button onClick={() => navigate('/validteBookings')}>View Bookings</button>
           </li>
           <li>
             <button onClick={handleLogout}>Logout</button>
