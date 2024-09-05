@@ -38,6 +38,9 @@ import AllBookings from "./Components/Booking Management/AllBookings/AllBookings
 import BookingManagerLogin from "./Components/Booking Management/Login/Login";
 import ValidateBookings from "./Components/Booking Management/ClientBooking/ValidateBookings";
 
+//Payment Management
+import AddPayment from "./Components/Payment Management/Add Payment/AddPayment";
+import DownloadReceipt from "./Components/Payment Management/Payments/Receipt"
 
 function App() {
   return (
@@ -81,6 +84,13 @@ function App() {
           <Route path="/bookingdash" element={<AllBookings />} />
           <Route path="/bookingmanagerlogin" element={<BookingManagerLogin />} />
           <Route path="/validteBookings" element={<ValidateBookings />} />
+
+           {/*Payment Managemnet System*/}
+           <Route path="/addpayment/:bookingId" element={<AddPayment />} />
+           <Route path="/payments/:paymentId/receipt" element={<DownloadReceipt />} />
+
+           
+
 
 
         </Routes>
