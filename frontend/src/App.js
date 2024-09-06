@@ -40,7 +40,9 @@ import ValidateBookings from "./Components/Booking Management/ClientBooking/Vali
 
 //Payment Management
 import AddPayment from "./Components/Payment Management/Add Payment/AddPayment";
-import DownloadReceipt from "./Components/Payment Management/Payments/Receipt"
+import Payments from "./Components/Payment Management/AllPayments/Payments";
+import PaymentManagerLogin from "./Components/Payment Management//Login/Login"
+
 
 function App() {
   return (
@@ -53,7 +55,7 @@ function App() {
 
 
           {/*Inventory Managemnet System*/}
-          <Route path="/inventory/login" element={<InventoryLogin />} />
+          <Route path="/inlogin" element={<InventoryLogin />} />
           <Route path="/inventory/additem" element={<AddItem />} />
           <Route path="/inventory/itemdash" element={<ItemDetails />} />
           
@@ -87,7 +89,8 @@ function App() {
 
            {/*Payment Managemnet System*/}
            <Route path="/addpayment/:bookingId" element={<AddPayment />} />
-           <Route path="/payments/:paymentId/receipt" element={<DownloadReceipt />} />
+           <Route path="/payments" element={<Payments />} />
+           <Route path="/paymentMnlogin" element={<PaymentManagerLogin />} />
 
            
 

@@ -33,13 +33,13 @@ function HomePage() {
         <div className="card" onClick={() => handleNavigation('/bookingmanagerlogin')}>
           <h3>Booking Management</h3>
         </div>
-        <div className="card" onClick={() => handleNavigation('/payment-management')}>
+        <div className="card" onClick={() => handleNavigation('/paymentMnlogin')}>
           <h3>Payment Management</h3>
         </div>
         <div className="card" onClick={() => handleNavigation('/operation-management')}>
           <h3>Operation Management</h3>
         </div>
-        <div className="card" onClick={() => handleNavigation('/inventory-management')}>
+        <div className="card" onClick={() => handleNavigation('/inlogin')}>
           <h3>Inventory Management</h3>
         </div>
         <div className="card" onClick={() => handleNavigation('/leave-management')}>

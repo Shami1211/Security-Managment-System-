@@ -6,6 +6,7 @@ const URL = "http://localhost:5000/bookings"; // Updated URL for bookings
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [payments, setPayments] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [noResults, setNoResults] = useState(false);
   const [updateData, setUpdateData] = useState({
@@ -22,6 +23,7 @@ const AllBookings = () => {
 
   useEffect(() => {
     fetchBookings();
+    fetchPayments(); // Fetch payments as well
   }, []);
 
   const fetchBookings = async () => {
@@ -30,6 +32,15 @@ const AllBookings = () => {
       setBookings(response.data.bookings);
     } catch (error) {
       console.error("Error fetching bookings:", error);
+    }
+  };
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/payments'); // Adjust the URL if needed
+      setPayments(response.data.payments);
+    } catch (error) {
+      console.error("Error fetching payments:", error);
     }
   };
 
@@ -110,6 +121,12 @@ const AllBookings = () => {
     onClose: () => alert("Print canceled"),
   });
 
+  // Helper function to get payment status by booking ID
+  const getPaymentStatus = (bookingId) => {
+    const payment = payments.find(p => p.bookingId._id === bookingId);
+    return payment ? payment.status : "Not Paid";
+  };
+
   return (
     <div className="booking-details">
       <div className="admin_topic_booking">
@@ -156,6 +173,7 @@ const AllBookings = () => {
                   <th>Packages</th>
                   <th>Date</th>
                   <th>Status</th>
+                  <th>Payment Status</th> {/* Added new column for payment status */}
                   <th>Security Officer</th>
                   <th>Special Instructions</th>
                   <th>Actions</th>
@@ -170,6 +188,7 @@ const AllBookings = () => {
                     <td>{booking.packages}</td>
                     <td>{new Date(booking.date).toLocaleDateString()}</td>
                     <td>{booking.status || "Pending"}</td>
+                    <td>{getPaymentStatus(booking._id)}</td> {/* Display payment status */}
                     <td>{booking.securityOfficer || "N/A"}</td>
                     <td>{booking.specialInstructions || "None"}</td>
                     <td>
@@ -252,17 +271,14 @@ const AllBookings = () => {
               <br />
               <label className="booking-full-box-label">Status</label>
               <br />
-              <select
+              <input
                 className="booking-full-box-input_update"
+                type="text"
                 name="status"
                 value={updateData.status}
                 onChange={(e) => handleChange(e.target.value, "status")}
                 required
-              >
-                <option value="Pending">Pending</option>
-                <option value="Confirmed">Confirmed</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
+              />
               <br />
               <label className="booking-full-box-label">Security Officer</label>
               <br />
@@ -276,14 +292,15 @@ const AllBookings = () => {
               <br />
               <label className="booking-full-box-label">Special Instructions</label>
               <br />
-              <textarea
+              <input
                 className="booking-full-box-input_update"
+                type="text"
                 name="specialInstructions"
                 value={updateData.specialInstructions}
                 onChange={(e) => handleChange(e.target.value, "specialInstructions")}
               />
               <br />
-              <button type="submit" className="update_form_submit">
+              <button type="submit" className="update_submit">
                 Update Booking
               </button>
             </form>

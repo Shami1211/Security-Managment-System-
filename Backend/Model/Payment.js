@@ -19,8 +19,7 @@ const PaymentSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['Paid', 'Pending', 'Failed'],
-    default: 'Pending',
+    default: 'Paid',  // Always default to 'Paid'
   },
   createdAt: {
     type: Date,

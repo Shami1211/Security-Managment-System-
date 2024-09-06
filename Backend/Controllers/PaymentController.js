@@ -15,7 +15,7 @@ const addPayment = async (req, res, next) => {
       bookingId,
       amount,
       method,
-      status,
+      status: 'Paid',
     });
 
     await newPayment.save();
