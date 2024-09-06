@@ -45,6 +45,7 @@ import PaymentManagerLogin from "./Components/Payment Management//Login/Login"
 
 //Payment Management
 import AllBookingss from "./Components/Operation Management/AllBookings/Booking"
+import AddOperations from "./Components/Operation Management/AddOperation/AddOperation"
 
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
 
            {/*Operation Managemnet System*/}
            <Route path="/allbookings" element={<AllBookingss />} />
+           <Route path="/add-operation" element={<AddOperations />} />
 
 
 

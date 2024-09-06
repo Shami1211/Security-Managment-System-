@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const URL = "http://localhost:5000/bookings"; // Updated URL for bookings
 
@@ -20,6 +21,8 @@ const AllBookings = () => {
     securityOfficer: "",
     specialInstructions: "",
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     fetchBookings();
@@ -98,6 +101,13 @@ const AllBookings = () => {
     return payment ? payment.status : "Not Paid";
   };
 
+  // Handler for creating schedule
+  const handleCreateSchedule = (booking) => {
+    navigate("/add-operation", {
+      state: { booking } // Pass booking details to the AddOperation page
+    });
+  };
+
   return (
     <div className="booking-details">
       <div className="admin_topic_booking">
@@ -147,6 +157,7 @@ const AllBookings = () => {
                   <th>Payment Status</th> {/* Added new column for payment status */}
                   <th>Security Officer</th>
                   <th>Special Instructions</th>
+                  <th>Action</th> {/* New column for action buttons */}
                 </tr>
               </thead>
               <tbody>
@@ -161,6 +172,14 @@ const AllBookings = () => {
                     <td>{getPaymentStatus(booking._id)}</td> {/* Display payment status */}
                     <td>{booking.securityOfficer || "N/A"}</td>
                     <td>{booking.specialInstructions || "None"}</td>
+                    <td>
+                      <button
+                        onClick={() => handleCreateSchedule(booking)}
+                        className="create-schedule-btn"
+                      >
+                        Create Schedule
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -256,9 +275,6 @@ const AllBookings = () => {
                 onChange={(e) => handleChange(e.target.value, "specialInstructions")}
               />
               <br />
-              <button type="submit" className="update_submit">
-                Update Booking
-              </button>
             </form>
           )}
         </div>
