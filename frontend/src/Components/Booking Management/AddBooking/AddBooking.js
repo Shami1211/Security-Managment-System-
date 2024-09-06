@@ -8,7 +8,7 @@ function AddBooking() {
     name: "",
     email: "",
     phone: "",
-    packages: "",
+    packages: "", // This will now be handled by the select dropdown
     date: "",
     status: "Pending", // Default value for status
     securityOfficer: "",
@@ -90,14 +90,27 @@ function AddBooking() {
             <br />
             <label className="booking-full-box-label">Packages</label>
             <br />
-            <input
-              type="text"
+            <select
               name="packages"
               value={inputs.packages}
               onChange={handleChange}
               className="booking-full-box-input"
               required
-            />
+            >
+              <option value="" disabled>Select a package</option>
+              <option value="Lady security officers (3 members)">
+                Lady security officers (3 members)
+              </option>
+              <option value="Security officers (2 members)">
+                Security officers (2 members)
+              </option>
+              <option value="VVIP officer (25 members)">
+                VVIP officer (25 members)
+              </option>
+              <option value="Bodyguard (10 members)">
+                Bodyguard (10 members)
+              </option>
+            </select>
             <br />
             <label className="booking-full-box-label">Date</label>
             <br />
