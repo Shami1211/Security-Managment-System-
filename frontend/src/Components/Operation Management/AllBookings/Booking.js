@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
-const URL = "http://localhost:5000/bookings"; // Updated URL for bookings
+const URL = "http://localhost:5000/bookings";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -22,11 +22,11 @@ const AllBookings = () => {
     specialInstructions: "",
   });
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBookings();
-    fetchPayments(); // Fetch payments as well
+    fetchPayments();
   }, []);
 
   const fetchBookings = async () => {
@@ -40,7 +40,7 @@ const AllBookings = () => {
 
   const fetchPayments = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/payments'); // Adjust the URL if needed
+      const response = await axios.get("http://localhost:5000/payments");
       setPayments(response.data.payments);
     } catch (error) {
       console.error("Error fetching payments:", error);
@@ -68,7 +68,7 @@ const AllBookings = () => {
     e.preventDefault();
     try {
       await axios.put(`${URL}/${updateData.id}`, updateData);
-      fetchBookings(); // Refresh bookings after update
+      fetchBookings();
       setUpdateData({
         id: "",
         name: "",
@@ -95,18 +95,21 @@ const AllBookings = () => {
     onClose: () => alert("Print canceled"),
   });
 
-  // Helper function to get payment status by booking ID
   const getPaymentStatus = (bookingId) => {
-    const payment = payments.find(p => p.bookingId._id === bookingId);
+    const payment = payments.find((p) => p.bookingId === bookingId);
     return payment ? payment.status : "Not Paid";
   };
 
-  // Handler for creating schedule
   const handleCreateSchedule = (booking) => {
     navigate("/add-operation", {
-      state: { booking } // Pass booking details to the AddOperation page
+      state: { booking },
     });
   };
+
+  const handleViewSchedules = () => {
+    navigate("/operations");
+  };
+  
 
   return (
     <div className="booking-details">
@@ -135,6 +138,16 @@ const AllBookings = () => {
             Search
           </button>
         </div>
+
+        <button
+            type="button"
+            className="booking-add-btn-admin"
+            onClick={handleViewSchedules}
+          >
+            View All Schedules
+          </button>
+
+        
         <div ref={summaryRef}>
           <div className="admin_topic_booking">
             Booking<span className="admin_sub_topic_booking"> Details</span>
@@ -154,10 +167,10 @@ const AllBookings = () => {
                   <th>Packages</th>
                   <th>Date</th>
                   <th>Status</th>
-                  <th>Payment Status</th> {/* Added new column for payment status */}
+                  <th>Payment Status</th>
                   <th>Security Officer</th>
                   <th>Special Instructions</th>
-                  <th>Action</th> {/* New column for action buttons */}
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,7 +182,7 @@ const AllBookings = () => {
                     <td>{booking.packages}</td>
                     <td>{new Date(booking.date).toLocaleDateString()}</td>
                     <td>{booking.status || "Pending"}</td>
-                    <td>{getPaymentStatus(booking._id)}</td> {/* Display payment status */}
+                    <td>{getPaymentStatus(booking._id)}</td>
                     <td>{booking.securityOfficer || "N/A"}</td>
                     <td>{booking.specialInstructions || "None"}</td>
                     <td>
@@ -179,6 +192,7 @@ const AllBookings = () => {
                       >
                         Create Schedule
                       </button>
+                      
                     </td>
                   </tr>
                 ))}
@@ -187,94 +201,10 @@ const AllBookings = () => {
           )}
           {updateData.id && (
             <form className="update_form" onSubmit={handleSubmit}>
-              <hr />
-              <br />
-              <label className="booking-full-box-label">Name</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="name"
-                value={updateData.name}
-                onChange={(e) => handleChange(e.target.value, "name")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Email</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="email"
-                name="email"
-                value={updateData.email}
-                onChange={(e) => handleChange(e.target.value, "email")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Phone</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="phone"
-                value={updateData.phone}
-                onChange={(e) => handleChange(e.target.value, "phone")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Packages</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="packages"
-                value={updateData.packages}
-                onChange={(e) => handleChange(e.target.value, "packages")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Date</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="date"
-                name="date"
-                value={updateData.date}
-                onChange={(e) => handleChange(e.target.value, "date")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Status</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="status"
-                value={updateData.status}
-                onChange={(e) => handleChange(e.target.value, "status")}
-                required
-              />
-              <br />
-              <label className="booking-full-box-label">Security Officer</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="securityOfficer"
-                value={updateData.securityOfficer}
-                onChange={(e) => handleChange(e.target.value, "securityOfficer")}
-              />
-              <br />
-              <label className="booking-full-box-label">Special Instructions</label>
-              <br />
-              <input
-                className="booking-full-box-input_update"
-                type="text"
-                name="specialInstructions"
-                value={updateData.specialInstructions}
-                onChange={(e) => handleChange(e.target.value, "specialInstructions")}
-              />
-              <br />
+              {/* Update form fields */}
+              <button className="update_form_submit_btn" type="submit">
+                Update Booking
+              </button>
             </form>
           )}
         </div>

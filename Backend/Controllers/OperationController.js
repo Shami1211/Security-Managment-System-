@@ -1,7 +1,7 @@
 const Operation = require("../Model/Operation");
 const Booking = require("../Model/Booking");
 
-const addOperation = async (req, res, next) => {
+const addOperation = async (req, res) => {
   try {
     const { bookingId, officers } = req.body;
 
@@ -16,19 +16,18 @@ const addOperation = async (req, res, next) => {
       bookingId,
       package: booking.packages,
       status: booking.status,
-      securityOfficer: booking.securityOfficer,
-      specialInstructions: booking.specialInstructions,
-      date: booking.date,
+      date: new Date(), // You might want to adjust this according to your needs
       officers,
     });
 
     await newOperation.save();
-    res.status(201).json({ newOperation });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(201).json({ message: "Operation added successfully", operation: newOperation });
+  } catch (error) {
+    console.error("Error adding operation:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const getAllOperations = async (req, res, next) => {
   try {
@@ -40,18 +39,20 @@ const getAllOperations = async (req, res, next) => {
   }
 };
 
-const getOperationById = async (req, res, next) => {
+const getOperationsByBookingId = async (req, res) => {
   try {
-    const operation = await Operation.findById(req.params.id).populate('bookingId');
-    if (!operation) {
-      return res.status(404).json({ message: "Operation not found" });
-    }
-    res.status(200).json({ operation });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
+    const { bookingId } = req.params;
+
+    // Fetch operations by bookingId
+    const operations = await Operation.find({ bookingId });
+    res.status(200).json({ operations });
+  } catch (error) {
+    console.error("Error fetching operations:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
+
 
 const updateOperation = async (req, res, next) => {
   try {
@@ -82,7 +83,7 @@ const deleteOperation = async (req, res, next) => {
 module.exports = {
   addOperation,
   getAllOperations,
-  getOperationById,
+  getOperationsByBookingId,
   updateOperation,
   deleteOperation,
 };
